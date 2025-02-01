@@ -1,7 +1,10 @@
 package com.clinic.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.Set;
 
 @Entity
 @Getter
@@ -18,4 +21,9 @@ public class Specialty {
 
     @Column(nullable = false)
     private String name;
+
+
+    @OneToMany(mappedBy = "specialty", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("doctors")
+    private Set<Doctor> doctors;
 }

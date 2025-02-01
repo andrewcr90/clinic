@@ -17,7 +17,11 @@ public class Doctor {
     private Long id;
     private String name;
     private String lastName;
-    private String speciality;
+
+    @ManyToOne
+    @JoinColumn(name = "specialty_id")
+    @JsonIgnoreProperties("doctors")
+    private Specialty specialty;
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("doctor")
@@ -25,6 +29,7 @@ public class Doctor {
 
     @ManyToOne
     @JoinColumn(name = "department_id")
+    @JsonIgnoreProperties("doctors")
     private Department department;
 
 }
